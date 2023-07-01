@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Majdouleen Al Smadi',
             'email' => 'Majdouleen@gmail.com',
-            'password' => Hash::make('wailan'),
+            'password' => Hash::make('Majdouleen'),
             'role' => 'Super',
             'random_key' => Str::random(60)
         ]);
