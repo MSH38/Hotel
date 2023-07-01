@@ -162,7 +162,7 @@
 		    	<div class="col-lg-3 sidebar">
 	      		<div class="sidebar-wrap bg-light ftco-animate">
 	      			<h3 class="heading mb-4">Advanced Search</h3>
-	      			<form action="{{route(roomFiltering)}}">
+	      			<form action="">
 	      				<div class="fields">
 							<div class="form-group">
 								<input type="text" id="checkin_date"  name="check-in" class="form-control checkin_date" placeholder="Check In Date" required>
