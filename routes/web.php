@@ -121,8 +121,10 @@ Route::get('/sendEvent', function () {
 });
 // Route::get('/home',[UserController::class,'home']);
 Route::get('/about-us',[UserController::class,'about']);
-Route::get('/contact',[ContactController::class,'show'])->name('contact.show');
-Route::post('/contact',[ContactController::class,'submit'])->name('contact.submit');
+Route::get('/contact',[ContactController::class,'createForm'])->name('contact.show');
+Route::post('/contact',[ContactController::class,'ContactUsForm'])->name('contact.submit');
+// Route::get('/contact', [ContactUsFormController::class, 'createForm']);
+// Route::post('/contact', [ContactUsFormController::class, 'ContactUsForm'])->name('contact.store');
 
 Route::get('/rooms',[RoomController::class,'displayRooms']);
 Route::get('/roomBooking',[RoomController::class,'singleRoom'])->middleware(['auth', 'verified'])->name('roomBooking');

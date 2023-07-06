@@ -17,6 +17,11 @@
 
 
     <section class="ftco-section contact-section bg-light">
+    @if(Session::has('success'))
+            <div class="alert alert-success">
+                {{Session::get('success')}}
+            </div>
+    @endif
       <div class="container">
         <div class="row d-flex mb-5 contact-info">
           <div class="col-md-12 mb-4">
@@ -46,24 +51,57 @@
         </div>
         <div class="row block-9">
           <div class="col-md-6 order-md-last d-flex">
-            <form action="{{route('contact.submit')}}" method="POST" class="bg-white p-5 contact-form">
+            <form action="{{route('contact.submit')}}" method="post" class="bg-white p-5 contact-form">
               @csrf
               <div class="form-group">
-                <input type="text" name="name" class="form-control" placeholder="Your Name">
+                <input type="text" id="name" name="name" class="form-control" placeholder="Your Name">
+                <!-- Error -->
+                @if ($errors->has('name'))
+                <div class="error">
+                    {{ $errors->first('name') }}
+                </div>
+                @endif
+              </div>
+              
+              <div class="form-group">
+                <input type="email" id="email" name="email" class="form-control" placeholder="Your Email">
+                @if ($errors->has('email'))
+                <div class="error">
+                    {{ $errors->first('email') }}
+                </div>
+                @endif
               </div>
               <div class="form-group">
-                <input type="text" name="email" class="form-control" placeholder="Your Email">
+                <input type="text" id="phone" name="phone" class="form-control" placeholder="phone number">
+                @if ($errors->has('phone'))
+                <div class="error">
+                    {{ $errors->first('phone') }}
+                </div>
+                @endif
               </div>
               <div class="form-group">
-                <input type="text" name="subject" class="form-control" placeholder="Subject">
+                <input type="text" id="subject" name="subject" class="form-control" placeholder="Subject">
+                @if ($errors->has('subject'))
+                <div class="error">
+                    {{ $errors->first('subject') }}
+                </div>
+                @endif
               </div>
               <div class="form-group">
-                <textarea name="" id=""  name="message" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+                <textarea  id="message"  name="message" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+                @if ($errors->has('message'))
+                <div class="error">
+                    {{ $errors->first('message') }}
+                </div>
+                @endif
               </div>
               <div class="form-group">
-                <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
+                <input type="submit" name="send" value="Send Message" class="btn btn-primary py-3 px-5">
               </div>
             </form>
+          
+
+
           
           </div>
 
@@ -73,4 +111,5 @@
         </div>
       </div>
     </section>
+    
 @endsection

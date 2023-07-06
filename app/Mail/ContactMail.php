@@ -28,30 +28,32 @@ class ContactMail extends Mailable
      *
      * @return \Illuminate\Mail\Mailables\Envelope
      */
-    public function build()
-    {
-        return $this->subject('{{$subject}}')
-                    ->replyTo($this->email)
-                    ->markdown('emails.contact');
-    }
-    // public function envelope()
+    // public function build()
     // {
-    //     return new Envelope(
-    //         subject: $subject,
-    //     );
+    //     return $this->subject('{{$subject}}')
+    //                 ->replyTo($this->email)
+    //                 ->markdown('emails.contact');
     // }
+    public function envelope()
+    {
+        return new Envelope(
+            subject: $subject,
+        );
+    }
 
     // /**
     //  * Get the message content definition.
     //  *
     //  * @return \Illuminate\Mail\Mailables\Content
     //  */
-    // public function content()
-    // {
-    //     return new Content(
-    //         markdown: 'emails.contact',
-    //     );
-    // }
+    public function content()
+    {
+        return new Content(
+            view: 'mail',
+            with: ['name' => $this->name],
+            markdown: 'emails.contact',
+        );
+    }
 
     /**
      * Get the attachments for the message.
