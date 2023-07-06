@@ -19,31 +19,23 @@
     		<div class="row">
 	        <div class="col-lg-9">
 		    		<div class="row">
-						<?php
-							$i=0;
-						?>
+					<?php $i=0;?>
 					@foreach ($types as $type)
-						<!-- $i++;
-						$i < $types; -->
-								<div class="col-sm col-md-6 col-lg-4 ftco-animate">
+					<?php $i++?> 
+								<div class="item col-sm col-md-6 col-lg-4 ftco-animate" data-item="item{{$i}}">
 									<div class="room">
-										<a href="{{route('roomBooking')}}" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/room-1.jpg);">
+										<a name="roomImg" href="{{route('roomBooking')}}" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/room-{{ $i }}.jpg);">
 											<div class="icon d-flex justify-content-center align-items-center">
 												<span class="icon-search2"></span>
 											</div>
 										</a>
-										<div class="text p-3 text-center">
-												<h3 class="mb-3"><a href="{{route('roomBooking')}}" value="{{ $type->id }}">{{ $type->name }}</a></h3>
-												<!-- @foreach ($rooms as $room)
-													<p><span class="price mr-2">${{ $room->price}}</span> <span class="per">per night</span></p>
-													<ul class="list">
-														<li><span>Max:</span>{{ $room->capacity }} Persons</li>
-														<li><span>Size:</span> 45 m2</li>
-														<li><span>View:</span> Sea View</li>
-														<li><span>Bed:</span> 1</li>
-													</ul>
-												@endforeach -->
+										<div class="text p-3 text-center" name="Typename">
+												<h3 class="mb-3">
+												<!-- <a href="{{ route('roomBooking') }}">Next Page</a> -->
 
+													<!-- <a  href="{{route('roomBooking')}}" value="{{ $type->id }}"> -->
+													<a   value="{{ $type->id }}">{{ $type->name }}</a>
+												</h3>
 											<hr>
 											<p class="pt-1"><a href="{{route('roomBooking')}}" class="btn-custom">Book Now <span class="icon-long-arrow-right"></span></a></p>
 										</div>
@@ -162,13 +154,15 @@
 		    	<div class="col-lg-3 sidebar">
 	      		<div class="sidebar-wrap bg-light ftco-animate">
 	      			<h3 class="heading mb-4">Advanced Search</h3>
-	      			<form action="">
 	      				<div class="fields">
+						  <!-- <form id="search-form" method="get" action="{{ route('search') }}"> -->
+						  <form id="search-form">
+
 							<div class="form-group">
-								<input type="text" id="checkin_date"  name="check-in" class="form-control checkin_date" placeholder="Check In Date" required>
+								<input type="text" id="checkin_date"  name="check_in_date" class="form-control checkin_date" placeholder="Check In Date" required>
 							</div>
 							<div class="form-group">
-								<input type="text" id="checkin_date" class="form-control checkout_date" placeholder="Check Out Date" required>
+								<input type="text" id="checkout_date" name="check_out_date" class="form-control checkout_date" placeholder="Check Out Date" required>
 							</div>
 							<div class="form-group">
 							<div class="select-wrap one-third">
@@ -199,22 +193,22 @@
 							<div class="form-group">
 								<div class="range-slider">
 									<span>
-										<input type="number" name="min-price" value="25000" min="0" max="120000"/>	-
-										<input type="number" name="max-price" value="50000" min="0" max="120000"/>
+										<input type="number"   value="25000" min="0" max="120000"/>	-
+										<input type="number"  value="50000" min="0" max="120000"/>
 									</span>
 									
-										<input value="1000" min="0" max="120000" step="500" type="range"/>
-										<input value="50000" min="0" max="120000" step="500" type="range"/>
+										<input  min="0" start="500"  name="min_price" id="min_price" max="120000" step="500" type="range"/>
+										<input  min="0"  name="max_price" id="max_price" max="120000" step="500" type="range"/>
 									</svg>
 								</div>
 							</div>
 							<div class="form-group">
 								<input type="submit" value="Search" class="btn btn-primary py-3 px-5">
 							</div>
+							</form>
 		            	</div>
-	            	</form>
 	      		</div>
-	      		<div class="sidebar-wrap bg-light ftco-animate">
+	      		<!-- <div class="sidebar-wrap bg-light ftco-animate">
 	      			<h3 class="heading mb-4">Star Rating</h3>
 	      			<form method="post" class="star-rating">
 							  <div class="form-check">
@@ -247,8 +241,8 @@
 						      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
 							    </label>
 							  </div>
-							</form>
-	      		</div>
+					</form>
+	      		</div> -->
 	        </div>
 		    </div>
     	</div>
@@ -301,3 +295,44 @@
     </section>
 
 @endsection
+<SCript>
+	const searchForm = document.getElementById('search-form');
+const searchResults = document.getElementById('search-results');
+
+searchForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const checkInDate = document.getElementById('check_in_date').value;
+    const checkOutDate = document.getElementById('check_out_date').value;
+
+    fetch(`/search?check_in_date=${checkInDate}&check_out_date=${checkOutDate}`)
+        .then(response => response.json())
+        .then(data => {
+            let html = '<ul>';
+
+            if (data.length === 0) {
+                html += '<li>No rooms available for the selected dates.</li>';
+            } else {
+                data.forEach(room => {
+                    html += `<li>Room ${room.room_number} - ${room.room_type} - $${room.price}/night</li>`;
+                });
+            }
+
+            html += '</ul>';
+
+            searchResults.innerHTML = html;
+        })
+        .catch(error => {
+            console.error(error);
+            searchResults.innerHTML = '<p>Something went wrong. Please try again later.</p>';
+        });
+});
+</SCript>
+<script>
+	var selectedItem;
+	document.querySelectorAll(".item").forEach(function(item) {
+		item.addEventListener("click", function() {
+			selectedItem = item.getAttribute("data-item");
+		});
+	});
+</script>

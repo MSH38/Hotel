@@ -36,9 +36,13 @@ use Illuminate\Support\Facades\Mail;
 |
 */
 
-Route::get('/', function () {
-    return view('hotel.home');
-});
+// Route::get('/', function () {
+//     return view('Hotel.home');
+// });
+
+
+Route::get('/',[HomeController::class, 'index'])->name('home');
+
 Route::get('/dashboard',[DashboardController::class, 'index']
 )->middleware(['auth', 'checkRole:Super,Admin'])->name('dashboard.index');
 
@@ -98,7 +102,13 @@ Route::group(['middleware' => ['auth', 'checkRole:Super,Admin']], function () {
     Route::get('/notification-to/{id}',[NotificationsController::class, 'routeTo'])->name('notification.routeTo');
 });
 
-// Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::group(['middleware' => ['auth', 'checkRole:customer']], function () {
+    
+
+});
+
+
+Route::get('/home', [HomeController::class, 'index']);
 
 Route::get('/sendEvent', function () {
     $superAdmins = User::where('role', 'Super')->get();
@@ -109,15 +119,17 @@ Route::get('/sendEvent', function () {
         // event(new NewReservationEvent($message, $superAdmin));
     }
 });
-Route::get('/home',[UserController::class,'home']);
+// Route::get('/home',[UserController::class,'home']);
 Route::get('/about-us',[UserController::class,'about']);
 Route::get('/contact',[ContactController::class,'show'])->name('contact.show');
 Route::post('/contact',[ContactController::class,'submit'])->name('contact.submit');
 
 Route::get('/rooms',[RoomController::class,'displayRooms']);
-Route::get('/roomBooking',[RoomController::class,'singleRoom'])->name('roomBooking');
-Route::get('/roomFiltering',[RoomController::class,'roomFiltering'])->name('roomFiltering');
+Route::get('/roomBooking',[RoomController::class,'singleRoom'])->middleware(['auth', 'verified'])->name('roomBooking');
+// Route::get('/roomFiltering',[RoomController::class,'roomFiltering'])->name('roomFiltering');
 Route::get('/restaurant',[UserController::class,'restaurant']);
+Route::get('/search', [RoomController::class,'search'])->name('search');
+
 
 require __DIR__.'/auth.php';
 

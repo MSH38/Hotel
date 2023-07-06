@@ -12,6 +12,7 @@ use App\Repositories\RoomRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use DB;
+use Auth;
 
 class RoomController extends Controller
 {
@@ -109,7 +110,40 @@ class RoomController extends Controller
         // $roomstatuses = RoomStatus::all();
         return view('Hotel.rooms', compact('types' , 'rooms' , 'transaction'));
     }
-    function singleRoom() {
+    function roomFiltering(Request $request) {
+        dd($request);  
         return view('Hotel.room');
     }
+    function singleRoom(Request $request) {
+        // $roomType = $request->input('Typename');
+        // $roomImage = $request->input('roomImg');
+        // $types = Type::all();
+        // dd($roomType,$roomImage);
+        // $rooms = Room::all();
+        // return view('Hotel.room',compact('types' ,'roomType','rooms','roomImage'));
+        dd($request);
+        $selectedItem = $request->query('selected_item');
+        return view('Hotel.room')->with('selectedItem', $selectedItem);
+
+    }
+
+
+    public function search(Request $request)
+{
+    $minPrice = $request->input('min_price');
+    $maxPrice = $request->input('max_price');
+    $checkInDate =$request->input('check_in_date');
+    $checkOutDate =$request->input('check_out_date');
+
+
+    $roomss = Room::whereBetween('price', [$minPrice, $maxPrice])->get();
+    $availableRooms = DB::table('transactions')
+                                ->whereDate('check_in','<=',$checkInDate)
+                                ->whereDate('check_out','>=',$checkOutDate)->get();
+                                
+
+    // return view('Hotel.rooms', ['roomss' => $roomss ,  'transaction' =>$transaction]);
+    return view('Hotel.rooms', compact('roomss','availableRooms','checkInDate','checkOutDate'));
+}
+    
 }

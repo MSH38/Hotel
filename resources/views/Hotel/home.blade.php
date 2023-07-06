@@ -32,7 +32,7 @@
       </div>
     </section>
 
-    <section class="ftco-booking">
+    <!-- <section class="ftco-booking">
     	<div class="container">
     		<div class="row">
     			<div class="col-lg-12">
@@ -62,12 +62,10 @@
 			        					<div class="select-wrap">
 			                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
 			                    <select name="" id="" class="form-control">
-			                    	<option value="">Suite</option>
-			                      <option value="">Family Room</option>
-			                      <option value="">Deluxe Room</option>
-			                      <option value="">Classic Room</option>
-			                      <option value="">Superior Room</option>
-			                      <option value="">Luxury Room</option>
+									<option value="" selected disabled>Suite</option>
+									@foreach ($types as $type)
+			                      		<option value="">{{ $type->name }}</option>
+									@endforeach
 			                    </select>
 			                  </div>
 				              </div>
@@ -82,12 +80,12 @@
 			        					<div class="select-wrap">
 			                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
 			                    <select name="" id="" class="form-control">
-			                    	<option value="">1 Adult</option>
-			                      <option value="">2 Adult</option>
-			                      <option value="">3 Adult</option>
-			                      <option value="">4 Adult</option>
-			                      <option value="">5 Adult</option>
-			                      <option value="">6 Adult</option>
+			                    	<option value="" selected>1 person</option>
+			                      <option value="">2 persons</option>
+			                      <option value="">3 persons</option>
+			                      <option value="">4 persons</option>
+			                      <option value="">5 persons</option>
+			                      <option value="">6 persons</option>
 			                    </select>
 			                  </div>
 				              </div>
@@ -104,7 +102,7 @@
 	    		</div>
     		</div>
     	</div>
-    </section>
+    </section> -->
 
 
     <section class="ftco-section ftc-no-pb ftc-no-pt">
@@ -196,7 +194,7 @@
       </div>
     </section>
 
-    <section class="ftco-section bg-light">
+    <!-- <section class="ftco-section bg-light">
     	<div class="container">
 				<div class="row justify-content-center mb-5 pb-3">
           <div class="col-md-7 heading-section text-center ftco-animate">
@@ -204,99 +202,28 @@
           </div>
         </div>    		
     		<div class="row">
-    			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
-    				<div class="room">
-    					<a href="rooms.html" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/room-1.jpg);">
-    						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-search2"></span>
-    						</div>
-    					</a>
-    					<div class="text p-3 text-center">
-    						<h3 class="mb-3"><a href="rooms.html">Suite Room</a></h3>
-    						<p><span class="price mr-2">$120.00</span> <span class="per">per night</span></p>
-    						<hr>
-    						<p class="pt-1"><a href="room-single.html" class="btn-custom">View Room Details <span class="icon-long-arrow-right"></span></a></p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
-    				<div class="room">
-    					<a href="rooms.html" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/room-2.jpg);">
-    						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-search2"></span>
-    						</div>
-    					</a>
-    					<div class="text p-3 text-center">
-    						<h3 class="mb-3"><a href="rooms.html">Family Room</a></h3>
-    						<p><span class="price mr-2">$20.00</span> <span class="per">per night</span></p>
-    						<hr>
-    						<p class="pt-1"><a href="room-single.html" class="btn-custom">View Room Details <span class="icon-long-arrow-right"></span></a></p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
-    				<div class="room">
-    					<a href="rooms.html" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/room-3.jpg);">
-    						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-search2"></span>
-    						</div>
-    					</a>
-    					<div class="text p-3 text-center">
-    						<h3 class="mb-3"><a href="rooms.html">Deluxe Room</a></h3>
-    						<p><span class="price mr-2">$150.00</span> <span class="per">per night</span></p>
-    						<hr>
-    						<p class="pt-1"><a href="room-single.html" class="btn-custom">View Room Details <span class="icon-long-arrow-right"></span></a></p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
-    				<div class="room">
-    					<a href="rooms.html" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/room-4.jpg);">
-    						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-search2"></span>
-    						</div>
-    					</a>
-    					<div class="text p-3 text-center">
-    						<h3 class="mb-3"><a href="rooms.html">Classic Room</a></h3>
-    						<p><span class="price mr-2">$130.00</span> <span class="per">per night</span></p>
-    						<hr>
-    						<p class="pt-1"><a href="room-single.html" class="btn-custom">View Room Details <span class="icon-long-arrow-right"></span></a></p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
-    				<div class="room">
-    					<a href="rooms.html" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/room-5.jpg);">
-    						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-search2"></span>
-    						</div>
-    					</a>
-    					<div class="text p-3 text-center">
-    						<h3 class="mb-3"><a href="rooms.html">Superior Room</a></h3>
-    						<p><span class="price mr-2">$300.00</span> <span class="per">per night</span></p>
-    						<hr>
-    						<p class="pt-1"><a href="room-single.html" class="btn-custom">View Room Details <span class="icon-long-arrow-right"></span></a></p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
-    				<div class="room">
-    					<a href="rooms.html" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/room-6.jpg);">
-    						<div class="icon d-flex justify-content-center align-items-center">
-    							<span class="icon-search2"></span>
-    						</div>
-    					</a>
-    					<div class="text p-3 text-center">
-    						<h3 class="mb-3"><a href="rooms.html">Luxury Room</a></h3>
-    						<p><span class="price mr-2">$500.00</span> <span class="per">per night</span></p>
-    						<hr>
-    						<p class="pt-1"><a href="room-single.html" class="btn-custom">View Room Details <span class="icon-long-arrow-right"></span></a></p>
-    					</div>
-    				</div>
-    			</div>
+				@foreach ($types as $type)
+					<div class="col-sm col-md-6 col-lg-4 ftco-animate">
+						<div class="room">
+							<a href="rooms.html" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/room-1.jpg);">
+								<div class="icon d-flex justify-content-center align-items-center">
+									<span class="icon-search2"></span>
+								</div>
+							</a>
+							<div class="text p-3 text-center">
+								<h3 class="mb-3"><a href="rooms.html">{{ $type->name}}</a></h3>
+							
+								<p><span class="price mr-2">$120.00	</span> <span class="per">per night</span></p>
+								<hr>
+								<p class="pt-1"><a href="room-single.html" class="btn-custom">View Room Details <span class="icon-long-arrow-right"></span></a></p>
+							</div>
+						</div>
+					</div>
+				@endforeach
+    			
     		</div>
     	</div>
-    </section>
+    </section> -->
 
     <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url(images/bg_1.jpg);">
     	<div class="container">
