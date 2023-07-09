@@ -104,32 +104,59 @@ class RoomController extends Controller
     }
     public function displayRooms(Room $room)
     {
+        // dd(request()->all());
+
         $types = Type::all();
         $rooms = Room::all();
         $transaction = Transaction::all();
         // $roomstatuses = RoomStatus::all();
         return view('Hotel.rooms', compact('types' , 'rooms' , 'transaction'));
     }
+
+
+
     function roomFiltering(Request $request) {
-        dd($request);  
-        return view('Hotel.room');
+        // dd(request()->all());
+        $minPrice = $request->input('min_price');
+        $maxPrice = $request->input('max_price');
+        $checkInDate =$request->input('check_in_date');
+        $checkOutDate =$request->input('check_out_date');
+        $capacity =$request->input('Capacity');
+
+        // dd($minPrice,$maxPrice, $checkInDate,$checkOutDate,$capacity);
+
+        $roomss = Room::whereBetween('price', [$minPrice, $maxPrice])->get();
+        // $roomss = DB::Table('rooms')
+        //                     ->whereBetween('price', [$minPrice, $maxPrice])
+        //                     ->where('capacity', '<=' , $capacity)->get();
+        dd($roomss);
+        $availableRooms = DB::table('transactions')
+                                    ->whereDate('check_in','<=',$checkInDate)
+                                    ->whereDate('check_out','>=',$checkOutDate)->get();
+        // dd($availableRooms );
+        // return view('Hotel.rooms', ['roomss' => $roomss ,  'transaction' =>$transaction]);
+        return view('Hotel.roomFiltered', compact('roomss','availableRooms','checkInDate','checkOutDate','capacity'));
+        // return view('Hotel.roomFiltered');
     }
+
     function singleRoom(Request $request) {
-        // $roomType = $request->input('Typename');
-        // $roomImage = $request->input('roomImg');
+        dd(request()->all());
+        $roomType = $request->input('singleRoom');
+        $roomImage = $request->input('roomImg');
         // $types = Type::all();
         // dd($roomType,$roomImage);
         // $rooms = Room::all();
         // return view('Hotel.room',compact('types' ,'roomType','rooms','roomImage'));
-        dd($request);
+        // dd($request);
         $selectedItem = $request->query('selected_item');
         return view('Hotel.room')->with('selectedItem', $selectedItem);
-
     }
 
 
     public function search(Request $request)
 {
+    dd($request);
+
     $minPrice = $request->input('min_price');
     $maxPrice = $request->input('max_price');
     $checkInDate =$request->input('check_in_date');
@@ -140,8 +167,6 @@ class RoomController extends Controller
     $availableRooms = DB::table('transactions')
                                 ->whereDate('check_in','<=',$checkInDate)
                                 ->whereDate('check_out','>=',$checkOutDate)->get();
-                                
-
     // return view('Hotel.rooms', ['roomss' => $roomss ,  'transaction' =>$transaction]);
     return view('Hotel.rooms', compact('roomss','availableRooms','checkInDate','checkOutDate'));
 }

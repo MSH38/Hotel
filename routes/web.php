@@ -15,8 +15,11 @@ use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\TransactionRoomReservationController;
+use App\Http\Controllers\BookTransactionRoomReservationController;
+
 use App\Http\Controllers\RoomStatusController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContactController;
@@ -102,10 +105,19 @@ Route::group(['middleware' => ['auth', 'checkRole:Super,Admin']], function () {
     Route::get('/notification-to/{id}',[NotificationsController::class, 'routeTo'])->name('notification.routeTo');
 });
 
-Route::group(['middleware' => ['auth', 'checkRole:customer']], function () {
-    
-
+Route::group(['middleware' => ['auth', 'checkRole:Customer']], function () {
+    Route::name('book.reservation.')->group(function () {
+        Route::get('/createIdentity', [BookTransactionRoomReservationController::class, 'createIdentity'])->name('createIdentity');
+        Route::get('/pickFromCustomer', [BookTransactionRoomReservationController::class, 'pickFromCustomer'])->name('pickFromCustomer');
+        Route::post('/storeCustomer', [BookTransactionRoomReservationController::class, 'storeCustomer'])->name('storeCustomer');
+        Route::get('/{customer}/viewCountPerson', [BookTransactionRoomReservationController::class, 'viewCountPerson'])->name('viewCountPerson');
+        Route::get('/{customer}/chooseRoom', [BookTransactionRoomReservationController::class, 'chooseRoom'])->name('chooseRoom');
+        Route::get('/{customer}/{room}/{from}/{to}/confirmation', [BookTransactionRoomReservationController::class, 'confirmation'])->name('confirmation');
+        Route::post('/{customer}/{room}/payDownPayment', [BookTransactionRoomReservationController::class, 'payDownPayment'])->name('payDownPayment');
+    });
+    // Route::resource('/booking', BookController::class);
 });
+
 
 
 Route::get('/home', [HomeController::class, 'index']);
@@ -127,10 +139,12 @@ Route::post('/contact',[ContactController::class,'ContactUsForm'])->name('contac
 // Route::post('/contact', [ContactUsFormController::class, 'ContactUsForm'])->name('contact.store');
 
 Route::get('/rooms',[RoomController::class,'displayRooms']);
-Route::get('/roomBooking',[RoomController::class,'singleRoom'])->middleware(['auth', 'verified'])->name('roomBooking');
+// Route::get('/roomBooking',[RoomController::class,'singleRoom'])->middleware(['auth', 'verified'])->name('roomBooking');
+
+Route::get('/roomBooking/{roomBooking}',[RoomController::class,'singleRoom'])->middleware(['auth', 'verified'])->name('roomBooking');
 // Route::get('/roomFiltering',[RoomController::class,'roomFiltering'])->name('roomFiltering');
 Route::get('/restaurant',[UserController::class,'restaurant']);
-Route::get('/search', [RoomController::class,'search'])->name('search');
+Route::get('/search', [RoomController::class,'roomFiltering'])->name('roomFiltering');
 
 
 require __DIR__.'/auth.php';

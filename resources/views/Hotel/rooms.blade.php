@@ -24,139 +24,31 @@
 					<?php $i++?> 
 								<div class="item col-sm col-md-6 col-lg-4 ftco-animate" data-item="item{{$i}}">
 									<div class="room">
-										<a name="roomImg" href="{{route('roomBooking')}}" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/room-{{ $i }}.jpg);">
+										<a name="roomImg" href="{{route('roomBooking',['roomBooking' =>$type->id]) }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/room-{{ $i }}.jpg);">
 											<div class="icon d-flex justify-content-center align-items-center">
 												<span class="icon-search2"></span>
 											</div>
 										</a>
 										<div class="text p-3 text-center" name="Typename">
 												<h3 class="mb-3">
-												<!-- <a href="{{ route('roomBooking') }}">Next Page</a> -->
 
-													<!-- <a  href="{{route('roomBooking')}}" value="{{ $type->id }}"> -->
 													<a   value="{{ $type->id }}">{{ $type->name }}</a>
 												</h3>
 											<hr>
-											<p class="pt-1"><a href="{{route('roomBooking')}}" class="btn-custom">Book Now <span class="icon-long-arrow-right"></span></a></p>
+											<p class="pt-1"><a href="{{route('roomBooking',['roomBooking' =>$type->id]) }}" class="btn-custom">Book Now <span class="icon-long-arrow-right"></span></a></p>
 										</div>
 									</div>
 								</div>
 					@endforeach
 
-
-		    			<!-- <div class="col-sm col-md-6 col-lg-4 ftco-animate">
-		    				<div class="room">
-		    					<a href="rooms-single.html" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/room-2.jpg);">
-		    						<div class="icon d-flex justify-content-center align-items-center">
-		    							<span class="icon-search2"></span>
-		    						</div>
-		    					</a>
-		    					<div class="text p-3 text-center">
-		    						<h3 class="mb-3"><a href="rooms-single.html">Family Room</a></h3>
-		    						<p><span class="price mr-2">$20.00</span> <span class="per">per night</span></p>
-		    						<ul class="list">
-		    							<li><span>Max:</span> 3 Persons</li>
-		    							<li><span>Size:</span> 45 m2</li>
-		    							<li><span>View:</span> Sea View</li>
-		    							<li><span>Bed:</span> 1</li>
-		    						</ul>
-		    						<hr>
-		    						<p class="pt-1"><a href="room-single.html" class="btn-custom">Book Now <span class="icon-long-arrow-right"></span></a></p>
-		    					</div>
-		    				</div>
-		    			</div>
-		    			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
-		    				<div class="room">
-		    					<a href="rooms-single.html" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/room-3.jpg);">
-		    						<div class="icon d-flex justify-content-center align-items-center">
-		    							<span class="icon-search2"></span>
-		    						</div>
-		    					</a>
-		    					<div class="text p-3 text-center">
-		    						<h3 class="mb-3"><a href="rooms-single.html">Deluxe Room</a></h3>
-		    						<p><span class="price mr-2">$150.00</span> <span class="per">per night</span></p>
-		    						<ul class="list">
-		    							<li><span>Max:</span> 5 Persons</li>
-		    							<li><span>Size:</span> 45 m2</li>
-		    							<li><span>View:</span> Sea View</li>
-		    							<li><span>Bed:</span> 2</li>
-		    						</ul>
-		    						<hr>
-		    						<p class="pt-1"><a href="room-single.html" class="btn-custom">Book Now <span class="icon-long-arrow-right"></span></a></p>
-		    					</div>
-		    				</div>
-		    			</div>
-		    			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
-		    				<div class="room">
-		    					<a href="rooms-single.html" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/room-4.jpg);">
-		    						<div class="icon d-flex justify-content-center align-items-center">
-		    							<span class="icon-search2"></span>
-		    						</div>
-		    					</a>
-		    					<div class="text p-3 text-center">
-		    						<h3 class="mb-3"><a href="rooms-single.html">Classic Room</a></h3>
-		    						<p><span class="price mr-2">$130.00</span> <span class="per">per night</span></p>
-		    						<ul class="list">
-		    							<li><span>Max:</span> 5 Persons</li>
-		    							<li><span>Size:</span> 45 m2</li>
-		    							<li><span>View:</span> Sea View</li>
-		    							<li><span>Bed:</span> 2</li>
-		    						</ul>
-		    						<hr>
-		    						<p class="pt-1"><a href="room-single.html" class="btn-custom">Book Now <span class="icon-long-arrow-right"></span></a></p>
-		    					</div>
-		    				</div>
-		    			</div>
-		    			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
-		    				<div class="room">
-		    					<a href="rooms-single.html" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/room-5.jpg);">
-		    						<div class="icon d-flex justify-content-center align-items-center">
-		    							<span class="icon-search2"></span>
-		    						</div>
-		    					</a>
-		    					<div class="text p-3 text-center">
-		    						<h3 class="mb-3"><a href="rooms-single.html">Superior Room</a></h3>
-		    						<p><span class="price mr-2">$300.00</span> <span class="per">per night</span></p>
-		    						<ul class="list">
-		    							<li><span>Max:</span> 6 Persons</li>
-		    							<li><span>Size:</span> 45 m2</li>
-		    							<li><span>View:</span> Sea View</li>
-		    							<li><span>Bed:</span> 3</li>
-		    						</ul>
-		    						<hr>
-		    						<p class="pt-1"><a href="room-single.html" class="btn-custom">Book Now <span class="icon-long-arrow-right"></span></a></p>
-		    					</div>
-		    				</div>
-		    			</div>
-		    			<div class="col-sm col-md-6 col-lg-4 ftco-animate">
-		    				<div class="room">
-		    					<a href="rooms-single.html" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/room-6.jpg);">
-		    						<div class="icon d-flex justify-content-center align-items-center">
-		    							<span class="icon-search2"></span>
-		    						</div>
-		    					</a>
-		    					<div class="text p-3 text-center">
-		    						<h3 class="mb-3"><a href="rooms-single.html">Luxury Room</a></h3>
-		    						<p><span class="price mr-2">$500.00</span> <span class="per">per night</span></p>
-		    						<ul class="list">
-		    							<li><span>Max:</span> 5 Persons</li>
-		    							<li><span>Size:</span> 45 m2</li>
-		    							<li><span>View:</span> Sea View</li>
-		    							<li><span>Bed:</span> 2</li>
-		    						</ul>
-		    						<hr>
-		    						<p class="pt-1"><a href="room-single.html" class="btn-custom">Book Now <span class="icon-long-arrow-right"></span></a></p>
-		    					</div>
-		    				</div>
-		    			</div> -->
 		    		</div>
 		    	</div>
 		    	<div class="col-lg-3 sidebar">
 	      		<div class="sidebar-wrap bg-light ftco-animate">
 	      			<h3 class="heading mb-4">Advanced Search</h3>
 	      				<div class="fields">
-						  <!-- <form id="search-form" method="get" action="{{ route('search') }}"> -->
-						  <form id="search-form">
+						  <form id="search-form" method="get" action="{{ route('roomFiltering') }}">
+						  <!-- <form id="search-form"> -->
 
 							<div class="form-group">
 								<input type="text" id="checkin_date"  name="check_in_date" class="form-control checkin_date" placeholder="Check In Date" required>
@@ -193,12 +85,12 @@
 							<div class="form-group">
 								<div class="range-slider">
 									<span>
-										<input type="number"   value="25000" min="0" max="120000"/>	-
-										<input type="number"  value="50000" min="0" max="120000"/>
+										<input type="number"   value="0" min="0" max="210000"/>	-
+										<input type="number"  value="210000" min="0" max="210000"/>
 									</span>
 									
-										<input  min="0" start="500"  name="min_price" id="min_price" max="120000" step="500" type="range"/>
-										<input  min="0"  name="max_price" id="max_price" max="120000" step="500" type="range"/>
+										<input  min="0" value="0" start="500"  name="max_price" id="max_price"  max="1000000" step="500" type="range"/>
+										<input  min="0" name="min_price" id="min_price"  max="1000000" step="500" type="range"/>
 									</svg>
 								</div>
 							</div>
