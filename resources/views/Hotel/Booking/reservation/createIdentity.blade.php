@@ -30,7 +30,8 @@
                                 @csrf
                                 <div class="form-group col-md-12">
                                     <label for="name" class="form-label">Name</label>
-                                    <input type="text" class="form-control " id="name" name="name"  value="{{ old('name', auth()->user()->name) }}" disabled>
+                                    <input type="text" class="form-control " id="name" name="name"  value="{{ old('name', auth()->user()->name) }}" >
+                                    <!-- <input type="text" class="form-control " id="name" name="name"  value="{{ old('name', auth()->user()->name) }}" disabled> -->
                                     @error('name')
                                         <div class="text-danger mt-1">
                                             {{ $message }}
@@ -40,7 +41,7 @@
                                 <div class="col-md-12">
                                     <label for="email" class="form-label">Email</label>
                                     <input type="email" class="form-control @error('email') is-invalid @enderror"  id=" email"
-                                        name="email" value="{{ old('email', auth()->user()->email) }}" disabled>
+                                        name="email" value="{{ old('email', auth()->user()->email) }}" >
                                     @error('email')
                                         <div class="text-danger mt-1">
                                             {{ $message }}

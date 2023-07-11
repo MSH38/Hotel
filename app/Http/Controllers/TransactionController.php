@@ -20,6 +20,7 @@ class TransactionController extends Controller
     {
         $transactions = $this->transactionRepository->getTransaction($request);
         $transactionsExpired = $this->transactionRepository->getTransactionExpired($request);
-        return view('transaction.index', compact('transactions', 'transactionsExpired'));
+        // return response()->json([ auth()->check() ]);
+        return view('transaction.index', compact('transactions','transactionsExpired'));
     }
 }

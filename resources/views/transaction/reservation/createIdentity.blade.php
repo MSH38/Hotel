@@ -79,7 +79,7 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div class="col-mg-12">
+                            <!-- <div class="col-mg-12">
                                 <label for="avatar" class="form-label">Profile Picture</label>
                                 <input class="form-control" type="file" name="avatar" id="avatar">
                                 @error('avatar')
@@ -87,7 +87,7 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
-                            </div>
+                            </div> -->
                             <div class="col-12">
                                 <button type="submit" class="btn myBtn shadow-sm border float-end">Save</button>
                             </div>

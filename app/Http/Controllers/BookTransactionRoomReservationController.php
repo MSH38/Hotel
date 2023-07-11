@@ -34,15 +34,46 @@ class BookTransactionRoomReservationController extends Controller
         return view('Hotel.Booking.reservation.pickFromCustomer', compact('customers', 'customersCount'));
     }
 
-    public function createIdentity()
+    public function createIdentity(StoreCustomerRequest $request, CustomerRepository $customerRepository)
     {
-        return view('Hotel.Booking.reservation.createIdentity');
+        $customer = $customerRepository;
+        if ($customer) {
+            // The email exists in the customers table, retrieve its data and go to the next page
+            return redirect()->route('Hotel.Booking.reservation.viewCountPerson', ['customer' => $customer->id])->with( 'Welcome Again ' . $customer->name );
+        } else {
+            // The email doesn't exist in the customers table, go to the form page
+            return view('Hotel.Booking.reservation.createIdentity');
+        }
     }
 
     public function storeCustomer(StoreCustomerRequest $request, CustomerRepository $customerRepository)
     {
-        $customer = $customerRepository->store($request);
-        return redirect()->route('Hotel.Booking.reservation.viewCountPerson', ['customer' => $customer->id])->with('success', 'Customer ' . $customer->name . ' created!');
+        // $request->validate([
+        //     'name' => ['string', 'max:255', 'default:' . auth()->user()->name],
+        //     'email' => ['string', 'max:255', 'default:' . auth()->user()->email]
+        //     // other validation rules for your form fields...
+        // ]);
+        // $validator = Validator::make($request->all(), [
+        //     'email' => 'required|email|unique:users,email',
+        // ]);
+
+        // if ($validator->fails()) {
+        //     return response()->json(['errors' => $validator->errors()], 422);
+        // }
+        // $customer = new Customer;
+        // $customer->user_id = auth()->user()->id;
+        // $customer->email = $request->input('email');
+        // $customer->save();
+        if ($customer) {
+            // The email exists in the customers table, retrieve its data and go to the next page
+            return redirect()->route('Hotel.Booking.reservation.viewCountPerson', ['customer' => $customer->id])->with( 'Welcome Again ' . $customer->name );
+        } else {
+            // The email doesn't exist in the customers table, go to the form page
+            $customer = $customerRepository->store($request);
+            return redirect()->route('Hotel.Booking.reservation.viewCountPerson', ['customer' => $customer->id])->with('success', 'Customer ' . $customer->name . ' created!');
+        }
+    //     $customer = $customerRepository->store($request);
+    //     return redirect()->route('Hotel.Booking.reservation.viewCountPerson', ['customer' => $customer->id])->with('success', 'Customer ' . $customer->name . ' created!');
     }
 
     public function viewCountPerson(Customer $customer)

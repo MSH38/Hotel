@@ -63,7 +63,6 @@ Route::group(['middleware' => ['auth', 'checkRole:Super']], function () {
 
 Route::group(['middleware' => ['auth', 'checkRole:Super,Admin']], function () {
     
-    
     Route::post('/room/{room}/image/upload', [ImageController::class, 'store'])->name('image.store');
     Route::delete('/image/{image}', [ImageController::class, 'destroy'])->name('image.destroy');
 
@@ -107,13 +106,13 @@ Route::group(['middleware' => ['auth', 'checkRole:Super,Admin']], function () {
 
 Route::group(['middleware' => ['auth', 'checkRole:Customer']], function () {
     Route::name('book.reservation.')->group(function () {
-        Route::get('/createIdentity', [BookTransactionRoomReservationController::class, 'createIdentity'])->name('createIdentity');
-        Route::get('/pickFromCustomer', [BookTransactionRoomReservationController::class, 'pickFromCustomer'])->name('pickFromCustomer');
-        Route::post('/storeCustomer', [BookTransactionRoomReservationController::class, 'storeCustomer'])->name('storeCustomer');
-        Route::get('/{customer}/viewCountPerson', [BookTransactionRoomReservationController::class, 'viewCountPerson'])->name('viewCountPerson');
-        Route::get('/{customer}/chooseRoom', [BookTransactionRoomReservationController::class, 'chooseRoom'])->name('chooseRoom');
-        Route::get('/{customer}/{room}/{from}/{to}/confirmation', [BookTransactionRoomReservationController::class, 'confirmation'])->name('confirmation');
-        Route::post('/{customer}/{room}/payDownPayment', [BookTransactionRoomReservationController::class, 'payDownPayment'])->name('payDownPayment');
+        Route::get('/CreateIdentity', [BookTransactionRoomReservationController::class, 'createIdentity'])->name('CustomerCreateIdentity');
+        Route::get('/PickFromCustomer', [BookTransactionRoomReservationController::class, 'pickFromCustomer'])->name('pickFromCustomer');
+        Route::post('/StoreCustomer', [BookTransactionRoomReservationController::class, 'storeCustomer'])->name('storeCustomer');
+        Route::get('/{customer}/ViewCountPerson', [BookTransactionRoomReservationController::class, 'viewCountPerson'])->name('viewCountPerson');
+        Route::get('/{customer}/ChooseRoom', [BookTransactionRoomReservationController::class, 'chooseRoom'])->name('chooseRoom');
+        Route::get('/{customer}/{room}/{from}/{to}/Confirmation', [BookTransactionRoomReservationController::class, 'confirmation'])->name('confirmation');
+        Route::post('/{customer}/{room}/PayDownPayment', [BookTransactionRoomReservationController::class, 'payDownPayment'])->name('payDownPayment');
     });
     // Route::resource('/booking', BookController::class);
 });
