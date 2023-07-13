@@ -113,10 +113,10 @@ class RegisterController extends Controller
             'birthdate' => $data['birthdate'],
             'user_id' => DB::users($this['id'])
         ]);
-        $customer = new Customer();
-        $customer->gender = $validatedData['gender'];
-        $customer->job = $validatedData['job'];
-        $customer->address = $validatedData['address'];
-        $user->customer()->save($customer);
+        // $customer = new Customer();
+        // $customer->gender = $validatedData['gender'];
+        // $customer->job = $validatedData['job'];
+        // $customer->address = $validatedData['address'];
+        // $user->customer()->save($customer);
     }
 }

@@ -68,7 +68,7 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->birthdate),
+            'password' => bcrypt($request->password),
             'role' => 'Customer',
             'random_key' => Str::random(60)
         ]);
@@ -93,7 +93,6 @@ class RegisteredUserController extends Controller
             'birthdate' => $request->birthdate,
             'gender' => $request->gender,
             'user_id' => $user->id
-            
         ]);
 
         // return $customer;
