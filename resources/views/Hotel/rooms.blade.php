@@ -24,10 +24,10 @@
 					<?php $i++?> 
 								<div class="item col-sm col-md-6 col-lg-4 ftco-animate" data-item="item{{$i}}">
 									<div class="room">
-										<a name="roomImg" href="{{route('roomBooking',['roomBooking' =>$type->id]) }}" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/room-{{ $i }}.jpg);">
-											<div class="icon d-flex justify-content-center align-items-center">
+										<a name="roomImg" href="" class="img d-flex justify-content-center align-items-center" style="background-image: url(images/room-{{ $i }}.jpg);">
+											<!-- <div class="icon d-flex justify-content-center align-items-center">
 												<span class="icon-search2"></span>
-											</div>
+											</div> -->
 										</a>
 										<div class="text p-3 text-center" name="Typename">
 												<h3 class="mb-3">
@@ -35,7 +35,7 @@
 													<a   value="{{ $type->id }}">{{ $type->name }}</a>
 												</h3>
 											<hr>
-											<p class="pt-1"><a href="{{route('roomBooking',['roomBooking' =>$type->id]) }}" class="btn-custom">Book Now <span class="icon-long-arrow-right"></span></a></p>
+											<p class="pt-1"><a href="{{ route('book.reservation.vCountPerson', ['customer' => $customer->id]) }}" class="btn-custom">Book Now <span class="icon-long-arrow-right"></span></a></p>
 										</div>
 									</div>
 								</div>

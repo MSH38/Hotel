@@ -81,6 +81,13 @@
                                         <x-input-label for="name" :value="__('Name')" />
                                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                                     </div>
+                                    <!-- Date-->
+                                    <div class="form-label-group">
+                                        <x-text-input type="text" id="birthdate" name="birthdate" class="form-control" placeholder="birthdate dd/mm/yyy"
+                                        :value="old('birthdate')" required autofocus autocomplete="birthdate" />
+                                        <x-input-label for="birthdate" :value="__('birthdate (yyyy/mm/dd)')" />
+                                        <x-input-error :messages="$errors->get('birthdate')" class="mt-2" />
+                                    </div>
                                     <!-- Email Address -->
                                     <div class="form-label-group">
                                         <x-text-input type="email" id="email" name="email" class="form-control" placeholder="Email"
@@ -102,6 +109,36 @@
                                         <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
                                         <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                                     </div>
+                                    <!-- gender -->
+                                    <div class="form-label-group">
+                                        <select class="form-select @error('gender') is-invalid @enderror" id="gender" name="gender" placeholder="gender" aria-label="Default select example">
+                                            {{-- <option selected hidden>Select</option> --}}
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select>
+                                        <x-input-error :messages="$errors->get('gender')" class="mt-2" />
+                                    </div>
+                                    <!-- Job -->
+                                    <div class="form-label-group">
+                                        <x-text-input type="text" id="job" name="job" class="form-control" placeholder="job"
+                                        :value="old('job')" required autocomplete="job" />
+                                        <x-input-label for="job" :value="__('job')" />
+                                        <x-input-error :messages="$errors->get('job')" class="mt-2" />
+                                    </div>
+                                    <!-- Address -->
+                                    <div class="form-label-group">
+                                        <textarea type="text" id="address" name="address" class="form-control" 
+                                        :value="old('job')" required autocomplete="address" placeholder="address"></textarea>
+                                        <!-- <x-input-label for="address" :value="__('address')" /> -->
+                                        <x-input-error :messages="$errors->get('address')" class="mt-2" />
+                                    </div>
+
+
+                                    <!-- <div class="col-md-12">
+                                        <label for="address" class="form-label">Address</label>
+                                        <textarea class="form-control" id="address" name="address"
+                                            rows="3">{{ old('address') }}</textarea>
+                                    </div> -->
 
                                     <div class="flex items-center justify-end mt-4">
                                         <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
@@ -114,6 +151,16 @@
                                         </div>
 
                                     </div>
+
+
+
+
+                                <!-- <div class="col-md-12">
+                                    <label for="birthdate" class="form-label">Date of birth</label>
+                                    <input type="date" class="form-control @error('birthdate') is-invalid @enderror"
+                                        id="birthdate" name="birthdate" value="{{ old('birthdate') }}">
+                                </div> -->
+                                
 
                                     <!-- Name -->
                                     <!-- <div>

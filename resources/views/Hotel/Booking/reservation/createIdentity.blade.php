@@ -25,7 +25,7 @@
                             <h2>Complete Customer Details</h2>
                         </div>
                         <div class="form-group p-3">
-                            <form class="row g-3" method="POST" action="{{ route('book.reservation.storeCustomer') }}"
+                            <form class="row g-3" method="POST" action="{{ route('book.reservation.SCustomer') }}"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group col-md-12">

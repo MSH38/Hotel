@@ -20,7 +20,7 @@
     <div class="container mt-3">
         <div class="row justify-content-md-center mt-4 my-3">
             <div class="col-lg-8 ">
-            <form class="d-flex" method="GET" action="{{ route('book.reservation.pickFromCustomer') }}">
+            <form class="d-flex" method="GET" action="{{ route('book.reservation.PCustomer') }}">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-user"
                         name="q" value="{{ request()->input('q') }}">
                     <button class="btn btn-outline-dark" type="submit">Search</button>

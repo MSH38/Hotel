@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreRoomRequest;
 use App\Models\Room;
+use App\Models\Customer;
+use App\Models\User;
 use App\Models\RoomStatus;
 use App\Models\Transaction;
 use App\Models\Type;
+use Illuminate\Support\Facades\Auth;
 use App\Repositories\ImageRepository;
 use App\Repositories\RoomRepository;
+use App\Repositories\CustomerRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use DB;
-use Auth;
 
 class RoomController extends Controller
 {
@@ -102,15 +105,27 @@ class RoomController extends Controller
             ], 500);
         }
     }
-    public function displayRooms(Room $room)
+    public function displayRooms(Room $room,Customer $customer,CustomerRepository $customerRepository,Request $request)
     {
         // dd(request()->all());
 
         $types = Type::all();
         $rooms = Room::all();
+        // $customer= Customer::select('user', function ($query) use ($user_id) {
+        //     $query->where('id', $user_id);
+        // })->value('user_id');
+        $userId= auth()->user()->id;
+        // $userId = $this->belongsTo(User::class,'id');
+
+        // dd($userId);
+        $customer = Customer::select('id')->where('user_id', $userId)->first();
+        // dd($customer);
+
+        // $customers = $customerRepository->get($request);
+        // $customersCount = $customerRepository->count($request);
         $transaction = Transaction::all();
         // $roomstatuses = RoomStatus::all();
-        return view('Hotel.rooms', compact('types' , 'rooms' , 'transaction'));
+        return view('Hotel.rooms', compact('types' , 'rooms' , 'transaction','customer'));
     }
 
 

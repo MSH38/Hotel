@@ -42,6 +42,27 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+
+    
+
+
+
+    // Create and save the Customer model
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -50,11 +71,14 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        dd('nammma');
+        // dd('nammma');
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'gender' => 'required',
+            'job' => 'required',
+            'address' => 'required',
         ]);
     }
 
@@ -70,11 +94,29 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'gender' => 'required',
+            'job' => 'required',
+            'address' => 'required',
+            'birthdate' => 'required'
         ]);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        return Customer::create([
+            'name' => $data['name'],
+            'email' => $data['address'],
+            'gender' => $data['gender'],
+            'job' => $data['job'],
+            'address' => $data['address'],
+            'birthdate' => $data['birthdate'],
+            'user_id' => DB::users($this['id'])
+        ]);
+        $customer = new Customer();
+        $customer->gender = $validatedData['gender'];
+        $customer->job = $validatedData['job'];
+        $customer->address = $validatedData['address'];
+        $user->customer()->save($customer);
     }
 }

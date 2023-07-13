@@ -34,16 +34,22 @@ class BookTransactionRoomReservationController extends Controller
         return view('Hotel.Booking.reservation.pickFromCustomer', compact('customers', 'customersCount'));
     }
 
-    public function createIdentity(StoreCustomerRequest $request, CustomerRepository $customerRepository)
+    public function createIdentity()
     {
-        $customer = $customerRepository;
-        if ($customer) {
-            // The email exists in the customers table, retrieve its data and go to the next page
-            return redirect()->route('Hotel.Booking.reservation.viewCountPerson', ['customer' => $customer->id])->with( 'Welcome Again ' . $customer->name );
-        } else {
-            // The email doesn't exist in the customers table, go to the form page
-            return view('Hotel.Booking.reservation.createIdentity');
-        }
+        // dd('blaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+        // StoreCustomerRequest $request, CustomerRepository $customerRepository
+        // $request=>StoreCustomerRequest::$request;
+        // $customer = CustomerRepository()->$customerRepository;
+        // $customer = $customerRepository;
+        // if ($customer) {
+        //     // The email exists in the customers table, retrieve its data and go to the next page
+        //     return redirect()->route('Hotel.Booking.reservation.viewCountPerson', ['customer' => $customer->id])->with( 'Welcome Again ' . $customer->name );
+        // } else {
+        //     // The email doesn't exist in the customers table, go to the form page
+        //     return view('Hotel.Booking.reservation.createIdentity');
+        // }
+        return view('Hotel.Booking.reservation.createIdentity');
+
     }
 
     public function storeCustomer(StoreCustomerRequest $request, CustomerRepository $customerRepository)
@@ -75,22 +81,23 @@ class BookTransactionRoomReservationController extends Controller
     //     $customer = $customerRepository->store($request);
     //     return redirect()->route('Hotel.Booking.reservation.viewCountPerson', ['customer' => $customer->id])->with('success', 'Customer ' . $customer->name . ' created!');
     }
+    function bla() {
+        dd('blalalallaal');
+    }
 
     public function viewCountPerson(Customer $customer)
-    {
+    {   
         return view('Hotel.Booking.reservation.viewCountPerson', compact('customer'));
     }
 
-    public function chooseRoom(ChooseRoomRequest $request, Customer $customer)
+    public function choosesRoom( Customer $customer)
     {
+        dd('ballla');
         $stayFrom = $request->check_in;
         $stayUntil = $request->check_out;
-
         $occupiedRoomId = $this->getOccupiedRoomID($request->check_in, $request->check_out);
-
         $rooms = $this->reservationRepository->getUnocuppiedroom($request, $occupiedRoomId);
         $roomsCount = $this->reservationRepository->countUnocuppiedroom($request, $occupiedRoomId);
-
         return view('Hotel.Booking.reservation.chooseRoom', compact('customer', 'rooms', 'stayFrom', 'stayUntil', 'roomsCount'));
     }
 

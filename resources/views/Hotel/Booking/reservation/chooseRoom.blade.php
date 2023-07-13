@@ -28,7 +28,7 @@
                             {{ Helper::dateFormat(request()->input('check_out')) }}</p>
                         <hr>
                         <form method="GET"
-                            action="{{ route('transaction.reservation.chooseRoom', ['customer' => $customer->id]) }}">
+                            action="{{ route('book.reservation.CRoom', ['customer' => $customer->id]) }}">
                             <div class="row mb-2">
                                 <input type="text" hidden name="count_person"
                                     value="{{ request()->input('count_person') }}">

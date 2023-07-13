@@ -176,10 +176,10 @@
                 <div class="modal-body">
                     <div class="d-flex justify-content-center">
                         <a class="btn btn-sm btn-primary m-1"
-                            href="{{ route('book.reservation.createIdentity') }}">No, create
+                            href="{{ route('book.reservation.CustomerCreateIdentity') }}">No, create
                             new account!</a>
                         <a class="btn btn-sm btn-success m-1"
-                            href="{{ route('book.reservation.pickFromCustomer') }}">Yes, use
+                            href="{{ route('book.reservation.CustomerPickFromCustomer') }}">Yes, use
                             their account!</a>
                     </div>
                 </div>

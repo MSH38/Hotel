@@ -106,16 +106,20 @@ Route::group(['middleware' => ['auth', 'checkRole:Super,Admin']], function () {
 
 Route::group(['middleware' => ['auth', 'checkRole:Customer']], function () {
     Route::name('book.reservation.')->group(function () {
-        Route::get('/CreateIdentity', [BookTransactionRoomReservationController::class, 'createIdentity'])->name('CustomerCreateIdentity');
-        Route::get('/PickFromCustomer', [BookTransactionRoomReservationController::class, 'pickFromCustomer'])->name('pickFromCustomer');
-        Route::post('/StoreCustomer', [BookTransactionRoomReservationController::class, 'storeCustomer'])->name('storeCustomer');
-        Route::get('/{customer}/ViewCountPerson', [BookTransactionRoomReservationController::class, 'viewCountPerson'])->name('viewCountPerson');
-        Route::get('/{customer}/ChooseRoom', [BookTransactionRoomReservationController::class, 'chooseRoom'])->name('chooseRoom');
-        Route::get('/{customer}/{room}/{from}/{to}/Confirmation', [BookTransactionRoomReservationController::class, 'confirmation'])->name('confirmation');
-        Route::post('/{customer}/{room}/PayDownPayment', [BookTransactionRoomReservationController::class, 'payDownPayment'])->name('payDownPayment');
+        Route::get('/CustomerCreateIdentity', [BookTransactionRoomReservationController::class, 'createIdentity'])->name('CIdentity');
+        Route::get('/CustomerPickFromCustomer', [BookTransactionRoomReservationController::class, 'pickFromCustomer'])->name('PCustomer');
+        Route::post('/CustomerStoreCustomer', [BookTransactionRoomReservationController::class, 'storeCustomer'])->name('SCustomer');
+        Route::get('/{customer}/CustomerViewCountPerson', [BookTransactionRoomReservationController::class, 'viewCountPerson'])->name('vCountPerson');
+        Route::get('/{customer}/CRoom', [BookTransactionRoomReservationController::class, 'choosesRoom'])->name('CRoom');
+        // Route::get('/{customer}/CRoom',function(){return view ('Hotel.Booking.reservation.createIdentity');})->name('CRoom');
+        Route::get('/{customer}/{room}/{from}/{to}/CustomerConfirmation', [BookTransactionRoomReservationController::class, 'confirmation'])->name('Confirm');
+        Route::post('/{customer}/{room}/CustomerPayDownPayment', [BookTransactionRoomReservationController::class, 'payDownPayment'])->name('payPayment');
     });
     // Route::resource('/booking', BookController::class);
 });
+// Route::get('/customerCC',function(){      
+//     return view ('Hotel.Booking.reservation.createIdentity');}
+//             );
 
 
 
@@ -137,14 +141,12 @@ Route::post('/contact',[ContactController::class,'ContactUsForm'])->name('contac
 // Route::get('/contact', [ContactUsFormController::class, 'createForm']);
 // Route::post('/contact', [ContactUsFormController::class, 'ContactUsForm'])->name('contact.store');
 
-Route::get('/rooms',[RoomController::class,'displayRooms']);
+Route::get('/rooms',[RoomController::class,'displayRooms'])->middleware(['auth', 'verified']);
 // Route::get('/roomBooking',[RoomController::class,'singleRoom'])->middleware(['auth', 'verified'])->name('roomBooking');
-
 Route::get('/roomBooking/{roomBooking}',[RoomController::class,'singleRoom'])->middleware(['auth', 'verified'])->name('roomBooking');
 // Route::get('/roomFiltering',[RoomController::class,'roomFiltering'])->name('roomFiltering');
 Route::get('/restaurant',[UserController::class,'restaurant']);
 Route::get('/search', [RoomController::class,'roomFiltering'])->name('roomFiltering');
-
 
 require __DIR__.'/auth.php';
 
