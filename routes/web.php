@@ -116,7 +116,7 @@ Route::group(['middleware' => ['auth', 'checkRole:Customer']], function () {
         Route::post('/{customer}/{room}/CustomerPayDownPayment', [BookTransactionRoomReservationController::class, 'payDownPayment'])->name('payPayment');
     });
     // Route::resource('/booking', BookController::class);
-});
+})->middleware(['auth', 'verified']);
 // Route::get('/customerCC',function(){      
 //     return view ('Hotel.Booking.reservation.createIdentity');}
 //             );

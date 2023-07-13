@@ -1,23 +1,9 @@
-@extends('layouts.master')
+@extends('template.master')
 @section('title', 'Choose Day Reservation')
+@section('head')
+    <link rel="stylesheet" href="{{ asset('style/css/progress-indication.css') }}">
+@endsection
 @section('content')
-
-<div class="hero-wrap" style="background-image: url('images/bg_1.jpg');">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
-        <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
-          <div class="text">
-            <p class="breadcrumbs mb-2"><span class="mr-2"><a href="index.html">Home</a></span> <span>About</span></p>
-            <h1 class="mb-4 bread">About Us</h1>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
     <div class="container mt-3">
         <div class="row justify-content-md-center">
             <div class="col-md-8 mt-2">

@@ -92,7 +92,6 @@ class BookTransactionRoomReservationController extends Controller
 
     public function choosesRoom( ChooseRoomRequest $request, Customer $customer)
     {
-        // dd('ballla');
         $stayFrom = $request->check_in;
         $stayUntil = $request->check_out;
         $occupiedRoomId = $this->getOccupiedRoomID($request->check_in, $request->check_out);

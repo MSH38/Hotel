@@ -1,21 +1,22 @@
-@extends('layouts.master')
-@section('title', 'Choose Room')
-@section('content')
-<div class="hero-wrap" style="background-image: url('images/bg_1.jpg');">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
-        <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
-          <div class="text">
-            <p class="breadcrumbs mb-2"><span class="mr-2"><a href="index.html">Home</a></span> <span>About</span></p>
-            <h1 class="mb-4 bread">About Us</h1>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+@extends('template.master')
+@section('title', 'Choose Room Reservation')
+@section('head')
+    <link rel="stylesheet" href="{{ asset('style/css/progress-indication.css') }}">
+    <style>
+        .wrapper {
+            max-width: 400px;
+        }
 
-  
+        .demo-1 {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+
+    </style>
+@endsection
+@section('content')
     <div class="container mt-3">
         <div class="row justify-content-md-center">
             <div class="col-md-8 mt-2">
@@ -69,7 +70,7 @@
                                             <div class="wrapper">
                                                 <p class="card-text mb-auto demo-1">{{ $room->view }}</p>
                                             </div>
-                                            <a href="{{ route('transaction.reservation.confirmation', ['customer' => $customer->id, 'room' => $room->id, 'from' => request()->input('check_in'), 'to' => request()->input('check_out')]) }}"
+                                            <a href="{{ route('book.reservation.Confirm', ['customer' => $customer->id, 'room' => $room->id, 'from' => request()->input('check_in'), 'to' => request()->input('check_out')]) }}"
                                                 class="btn myBtn shadow-sm border w-100 m-2">Choose</a>
                                         </div>
                                         <div class="col-auto d-none d-lg-block">
@@ -86,12 +87,13 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 {{ $rooms->onEachSide(1)->appends([
-        'count_person' => request()->input('count_person'),
-        'check_in' => request()->input('check_in'),
-        'check_out' => request()->input('check_out'),
-        'sort_name' => request()->input('sort_name'),
-        'sort_type' => request()->input('sort_type'),
-    ])->links('template.paginationlinks') }}
+                                        'count_person' => request()->input('count_person'),
+                                        'check_in' => request()->input('check_in'),
+                                        'check_out' => request()->input('check_out'),
+                                        'sort_name' => request()->input('sort_name'),
+                                        'sort_type' => request()->input('sort_type'),
+                                    ])->links('template.paginationlinks')
+                                }}
                             </div>
                         </div>
                     </div>

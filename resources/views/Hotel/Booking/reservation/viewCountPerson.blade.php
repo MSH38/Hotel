@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ asset('style/css/progress-indication.css') }}">
 @endsection
 @section('content')
-    @include('transaction.reservation.progressbar')
+    <!-- @include('transaction.reservation.progressbar') -->
     <div class="container mt-3">
         <div class="row justify-content-md-center">
             <div class="col-md-8 mt-2">
@@ -13,7 +13,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <form class="row g-3" method="GET"
-                                    action="{{ route('transaction.reservation.chooseRoom', ['customer' => $customer->id]) }}">
+                                    action="{{ route('book.reservation.CRoom', ['customer' => $customer->id]) }}">
                                     <div class="col-md-12">
                                         <label for="count_person" class="form-label">
                                             How many person?
