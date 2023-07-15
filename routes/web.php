@@ -109,7 +109,8 @@ Route::group(['middleware' => ['auth', 'checkRole:Customer']], function () {
         Route::get('/CustomerCreateIdentity', [BookTransactionRoomReservationController::class, 'createIdentity'])->name('CIdentity');
         Route::get('/CustomerPickFromCustomer', [BookTransactionRoomReservationController::class, 'pickFromCustomer'])->name('PCustomer');
         Route::post('/CustomerStoreCustomer', [BookTransactionRoomReservationController::class, 'storeCustomer'])->name('SCustomer');
-        Route::get('/{customer}/CustomerViewCountPerson', [BookTransactionRoomReservationController::class, 'viewCountPerson'])->name('vCountPerson');
+        // Route::get('/{customer}/CustomerViewCountPerson', [BookTransactionRoomReservationController::class, 'viewCountPerson'])->name('vCountPerson');
+        Route::get('/{customer}/test', [BookTransactionRoomReservationController::class, 'test'])->name('vCountPerson');
         Route::get('/{customer}/CRoom', [BookTransactionRoomReservationController::class, 'choosesRoom'])->name('CRoom');
         // Route::get('/{customer}/CRoom',function(){return view ('Hotel.Booking.reservation.createIdentity');})->name('CRoom');
         Route::get('/{customer}/{room}/{from}/{to}/CustomerConfirmation', [BookTransactionRoomReservationController::class, 'confirmation'])->name('Confirm');

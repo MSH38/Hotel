@@ -130,11 +130,11 @@ class BookTransactionRoomReservationController extends Controller
 
         $superAdmins = User::where('role', 'Super')->get();
 
-        foreach ($superAdmins as $superAdmin) {
-            $message = 'Reservation added by ' . $customer->name;
-            event(new NewReservationEvent($message, $superAdmin));
-            $superAdmin->notify(new NewRoomReservationDownPayment($transaction, $payment));
-        }
+        // foreach ($superAdmins as $superAdmin) {
+        //     $message = 'Reservation added by ' . $customer->name;
+        //     event(new NewReservationEvent($message, $superAdmin));
+        //     $superAdmin->notify(new NewRoomReservationDownPayment($transaction, $payment));
+        // }
 
         event(new RefreshDashboardEvent("Someone reserved a room"));
 

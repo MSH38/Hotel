@@ -47,56 +47,56 @@
 	      		<div class="sidebar-wrap bg-light ftco-animate">
 	      			<h3 class="heading mb-4">Advanced Search</h3>
 	      				<div class="fields">
-						  <form id="search-form" method="get" action="{{ route('roomFiltering') }}">
+						  	<form id="search-form" method="get" action="{{ route('roomFiltering') }}">
 						  <!-- <form id="search-form"> -->
 
-							<div class="form-group">
-								<input type="text" id="checkin_date"  name="check_in_date" class="form-control checkin_date" placeholder="Check In Date" required>
-							</div>
-							<div class="form-group">
-								<input type="text" id="checkout_date" name="check_out_date" class="form-control checkout_date" placeholder="Check Out Date" required>
-							</div>
-							<div class="form-group">
-							<div class="select-wrap one-third">
-								<div class="icon"><span class="ion-ios-arrow-down"></span></div>
-									<select name="" id="" class="form-control">
-										<option value="" selected disabled>Room Type</option>
-										@foreach ($types as $type)
-											<option value="{{ $type->id }}">{{ $type->name }}</option>
-										@endforeach
-									</select>
+								<div class="form-group">
+									<input type="text" id="checkin_date"  name="check_in_date" class="form-control checkin_date" placeholder="Check In Date" required>
 								</div>
-							</div>
-							<div class="form-group">
+								<div class="form-group">
+									<input type="text" id="checkout_date" name="check_out_date" class="form-control checkout_date" placeholder="Check Out Date" required>
+								</div>
+								<div class="form-group">
 								<div class="select-wrap one-third">
 									<div class="icon"><span class="ion-ios-arrow-down"></span></div>
-										<select name="Capacity" id="" class="form-control">
-											<option value=""  disabled>Person</option>
-										<option value="1">1 Person</option>
-										<option value="2">2 Person</option>
-										<option value="3">3 Person</option>
-										<option value="4">4 Person</option>
-										<option value="5">5 Person</option>
+										<select name="" id="" class="form-control">
+											<option value="" selected disabled>Room Type</option>
+											@foreach ($types as $type)
+												<option value="{{ $type->id }}">{{ $type->name }}</option>
+											@endforeach
 										</select>
 									</div>
 								</div>
-							</div>
-
-							<div class="form-group">
-								<div class="range-slider">
-									<span>
-										<input type="number"   value="0" min="0" max="210000"/>	-
-										<input type="number"  value="210000" min="0" max="210000"/>
-									</span>
-									
-										<input  min="0" value="0" start="500"  name="max_price" id="max_price"  max="1000000" step="500" type="range"/>
-										<input  min="0" name="min_price" id="min_price"  max="1000000" step="500" type="range"/>
-									</svg>
+								<div class="form-group">
+									<div class="select-wrap one-third">
+										<div class="icon"><span class="ion-ios-arrow-down"></span></div>
+											<select name="Capacity" id="" class="form-control">
+												<option value=""  disabled>Person</option>
+											<option value="1">1 Person</option>
+											<option value="2">2 Person</option>
+											<option value="3">3 Person</option>
+											<option value="4">4 Person</option>
+											<option value="5">5 Person</option>
+											</select>
+										</div>
+									</div>
 								</div>
-							</div>
-							<div class="form-group">
-								<input type="submit" value="Search" class="btn btn-primary py-3 px-5">
-							</div>
+
+								<div class="form-group">
+									<div class="range-slider">
+										<span>
+											<input type="number"   value="0" min="0" max="210000"/>	-
+											<input type="number"  value="210000" min="0" max="210000"/>
+										</span>
+										
+											<input  min="0" value="0" start="500"  name="max_price" id="max_price"  max="1000000" step="500" type="range"/>
+											<input  min="0" name="min_price" id="min_price"  max="1000000" step="500" type="range"/>
+										</svg>
+									</div>
+								</div>
+								<div class="form-group">
+									<input type="submit" value="Search" class="btn btn-primary py-3 px-5">
+								</div>`
 							</form>
 		            	</div>
 	      		</div>
@@ -140,58 +140,58 @@
     	</div>
     </section>
     <section class="instagram pt-5">
-      <div class="container-fluid">
-        <div class="row no-gutters justify-content-center pb-5">
-          <div class="col-md-7 text-center heading-section ftco-animate">
-            <h2><span>Instagram</span></h2>
-          </div>
-        </div>
-        <div class="row no-gutters">
-          <div class="col-sm-12 col-md ftco-animate">
-            <a href="images/insta-1.jpg" class="insta-img image-popup" style="background-image: url(images/insta-1.jpg);">
-              <div class="icon d-flex justify-content-center">
-                <span class="icon-instagram align-self-center"></span>
-              </div>
-            </a>
-          </div>
-          <div class="col-sm-12 col-md ftco-animate">
-            <a href="images/insta-2.jpg" class="insta-img image-popup" style="background-image: url(images/insta-2.jpg);">
-              <div class="icon d-flex justify-content-center">
-                <span class="icon-instagram align-self-center"></span>
-              </div>
-            </a>
-          </div>
-          <div class="col-sm-12 col-md ftco-animate">
-            <a href="images/insta-3.jpg" class="insta-img image-popup" style="background-image: url(images/insta-3.jpg);">
-              <div class="icon d-flex justify-content-center">
-                <span class="icon-instagram align-self-center"></span>
-              </div>
-            </a>
-          </div>
-          <div class="col-sm-12 col-md ftco-animate">
-            <a href="images/insta-4.jpg" class="insta-img image-popup" style="background-image: url(images/insta-4.jpg);">
-              <div class="icon d-flex justify-content-center">
-                <span class="icon-instagram align-self-center"></span>
-              </div>
-            </a>
-          </div>
-          <div class="col-sm-12 col-md ftco-animate">
-            <a href="images/insta-5.jpg" class="insta-img image-popup" style="background-image: url(images/insta-5.jpg);">
-              <div class="icon d-flex justify-content-center">
-                <span class="icon-instagram align-self-center"></span>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
+		<div class="container-fluid">
+			<div class="row no-gutters justify-content-center pb-5">
+			<div class="col-md-7 text-center heading-section ftco-animate">
+				<h2><span>Instagram</span></h2>
+			</div>
+			</div>
+			<div class="row no-gutters">
+			<div class="col-sm-12 col-md ftco-animate">
+				<a href="images/insta-1.jpg" class="insta-img image-popup" style="background-image: url(images/insta-1.jpg);">
+				<div class="icon d-flex justify-content-center">
+					<span class="icon-instagram align-self-center"></span>
+				</div>
+				</a>
+			</div>
+			<div class="col-sm-12 col-md ftco-animate">
+				<a href="images/insta-2.jpg" class="insta-img image-popup" style="background-image: url(images/insta-2.jpg);">
+				<div class="icon d-flex justify-content-center">
+					<span class="icon-instagram align-self-center"></span>
+				</div>
+				</a>
+			</div>
+			<div class="col-sm-12 col-md ftco-animate">
+				<a href="images/insta-3.jpg" class="insta-img image-popup" style="background-image: url(images/insta-3.jpg);">
+				<div class="icon d-flex justify-content-center">
+					<span class="icon-instagram align-self-center"></span>
+				</div>
+				</a>
+			</div>
+			<div class="col-sm-12 col-md ftco-animate">
+				<a href="images/insta-4.jpg" class="insta-img image-popup" style="background-image: url(images/insta-4.jpg);">
+				<div class="icon d-flex justify-content-center">
+					<span class="icon-instagram align-self-center"></span>
+				</div>
+				</a>
+			</div>
+			<div class="col-sm-12 col-md ftco-animate">
+				<a href="images/insta-5.jpg" class="insta-img image-popup" style="background-image: url(images/insta-5.jpg);">
+				<div class="icon d-flex justify-content-center">
+					<span class="icon-instagram align-self-center"></span>
+				</div>
+				</a>
+			</div>
+			</div>
+		</div>
     </section>
 
 @endsection
-<SCript>
+<!-- <SCript>
 	const searchForm = document.getElementById('search-form');
-const searchResults = document.getElementById('search-results');
+	const searchResults = document.getElementById('search-results');
 
-searchForm.addEventListener('submit', (event) => {
+	searchForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
     const checkInDate = document.getElementById('check_in_date').value;
@@ -218,7 +218,7 @@ searchForm.addEventListener('submit', (event) => {
             console.error(error);
             searchResults.innerHTML = '<p>Something went wrong. Please try again later.</p>';
         });
-});
+	});
 </SCript>
 <script>
 	var selectedItem;
@@ -227,4 +227,4 @@ searchForm.addEventListener('submit', (event) => {
 			selectedItem = item.getAttribute("data-item");
 		});
 	});
-</script>
+</script> -->

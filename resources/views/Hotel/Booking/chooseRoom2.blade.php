@@ -1,21 +1,41 @@
-@extends('layouts.master')
-@section('title', 'Choose Room Reservation')
-@section('content')
-<div class="hero-wrap" style="background-image: url('{{asset('images/bg_1.jpg')}}');">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
-        <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
-          <div class="text">
-            <p class="breadcrumbs mb-2"><span class="mr-2"><a href="/">Home</a></span> <span>About</span></p>
-            <h1 class="mb-4 bread">Complete Customer Details</h1>
-          </div>
-        </div>
-      </div>
-    </div>
-</div>
+<!doctype html>
+<html lang="en">
 
-<section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url({asset('images/bg_2.jpg')}});">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    {{-- Icon --}}
+    <link rel="icon" href="{{ asset('img/logo/sip.png') }}">
+    {{-- style --}}
+    @vite('resources/sass/app.scss')
+    <link rel="stylesheet" href="{{ asset('style/css/progress-indication.css') }}">
+    <style>
+        .wrapper {
+            max-width: 400px;
+        }
+
+        .demo-1 {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+
+    </style>
+    
+    <title>Choose Room Reservation</title>
+    
+</head>
+
+<body>
+    <header>
+        @include('layouts.main-header')
+    </header>
+
+    <!-- content -->
     <div class="container mt-3">
         <div class="row justify-content-md-center">
             <div class="col-md-8 mt-2">
@@ -66,8 +86,8 @@
                                             <div class="mb-1 text-muted">{{ Helper::convertToRupiah($room->price) }} /
                                                 Day
                                             </div>
-                                            <div class="wrapper" style="max-width: 400px;">
-                                                <p class="card-text mb-auto demo-1" style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">{{ $room->view }}</p>
+                                            <div class="wrapper">
+                                                <p class="card-text mb-auto demo-1">{{ $room->view }}</p>
                                             </div>
                                             <a href="{{ route('book.reservation.Confirm', ['customer' => $customer->id, 'room' => $room->id, 'from' => request()->input('check_in'), 'to' => request()->input('check_out')]) }}"
                                                 class="btn myBtn shadow-sm border w-100 m-2">Choose</a>
@@ -149,6 +169,31 @@
             </div>
         </div>
     </div>
-</section>
 
-@endsection
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/jquery.animateNumber.min.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/jquery.timepicker.min.js"></script>
+    <script src="js/scrollax.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="js/google-map.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+
+
+
+
+
+
