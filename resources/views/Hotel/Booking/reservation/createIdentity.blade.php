@@ -31,7 +31,6 @@
                                 <div class="form-group col-md-12">
                                     <label for="name" class="form-label">Name</label>
                                     <input type="text" class="form-control " id="name" name="name"  value="{{ old('name', auth()->user()->name) }}" >
-                                    <!-- <input type="text" class="form-control " id="name" name="name"  value="{{ old('name', auth()->user()->name) }}" disabled> -->
                                     @error('name')
                                         <div class="text-danger mt-1">
                                             {{ $message }}

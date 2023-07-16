@@ -54,9 +54,17 @@
                                     </div>
                                 </div>
                                 <hr>
+                                @if (Session::has('success'))
+                                    <div class="alert alert-success text-center">
+                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                                        <p>{{ Session::get('success') }}</p>
+                                    </div>
+                                @endif
                                 <div class="col-sm-12 mt-2">
+
                                     <form method="POST"
-                                        action="{{ route('book.reservation.payPayment', ['customer' => $customer->id, 'room' => $room->id]) }}">
+                                        action="{{ route('book.reservation.payPayment', ['customer' => $customer->id, 'room' => $room->id]) }}"
+                                        class="require-validation"  data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form">
                                         @csrf
                                         <div class="row mb-3">
                                             <label for="check_in" class="col-sm-2 col-form-label">Check In</label>
@@ -81,24 +89,24 @@
                                                     readonly>
                                             </div>
                                         </div>
-                                        <div class="row mb-3">
-                                            <label for="total_price" class="col-sm-2 col-form-label">Total Price</label>
+                                        <!-- <div class="row mb-3">
+                                            <label for="total_price" class="col-sm-2 col-form-label btn-lg">Total Price</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" id="total_price" name="total_price"
                                                     placeholder="col-form-label"
                                                     value="{{ Helper::convertToRupiah(Helper::getTotalPayment($dayDifference, $room->price)) }} "
                                                     readonly>
                                             </div>
-                                        </div>
-                                        <div class="row mb-3">
+                                        </div> -->
+                                        <!-- <div class="row mb-3">
                                             <label for="minimum_dp" class="col-sm-2 col-form-label">Minimum DP</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" id="minimum_dp" name="minimum_dp"
                                                     placeholder="col-form-label"
                                                     value="{{ Helper::convertToRupiah($downPayment) }} " readonly>
                                             </div>
-                                        </div>
-                                        <div class="row mb-3">
+                                        </div> -->
+                                        <!-- <div class="row mb-3">
                                             <label for="downPayment" class="col-sm-2 col-form-label">Payment</label>
                                             <div class="col-sm-10">
                                                 <input type="text"
@@ -111,12 +119,62 @@
                                                     </div>
                                                 @enderror
                                             </div>
+                                        </div> -->
+                                    <hr>
+                                    <div class="text-center ">
+                                        <h5> Payment Card Information </h5>
+                                    </div>
+                                    <div class="row mb-3 required mt-3">
+                                        <label for="downPayment" class="col-sm-2 col-form-label">Name on Card</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control @error('downPayment') is-invalid @enderror"
+                                                    placeholder="Input payment Card user Name" >
                                         </div>
+                                    </div>
+                                    <div class="row mb-3 required">
+                                        <label for="downPayment" class="col-sm-2 col-form-label">Card Number</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control @error('downPayment') is-invalid @enderror"
+                                                    placeholder="Input payment Card number" value="{{ old('CardNumber')}}" autocomplete='off' size='16' >
+                                        </div>
+                                    </div>
+                                    <div class='form-row row'>
+                                        <div class='col-xs-12 col-md-4 form-group cvc required'>
+                                            <label class='control-label'>CVC</label> <input autocomplete='off'
+                                                class='form-control card-cvc' placeholder='ex. 311' size='4'
+                                                type='text'>
+                                        </div>
+                                        <div class='col-xs-12 col-md-4 form-group expiration required'>
+                                            <label class='control-label'>Expiration Month</label> <input
+                                                class='form-control card-expiry-month' placeholder='MM' size='2'
+                                                type='text'>
+                                        </div>
+                                        <div class='col-xs-12 col-md-4 form-group expiration required'>
+                                            <label class='control-label'>Expiration Year</label> <input
+                                                class='form-control card-expiry-year' placeholder='YYYY' size='4'
+                                                type='text'>
+                                        </div>
+                                    </div>
+            
+                                
+            
+                                    <div class="row">
+                                        <button class="btn btn-success btn-lg btn-block" name="Total_price" disabled type="">
+                                            Price: {{ Helper::convertToRupiah(Helper::getTotalPayment($dayDifference, $room->price)) }} 
+                                        </button><br>
+                                    </div>
+                                    <!-- <div class="row">Total_price
+                                        <div class="col-xs-12">
+                                            <button class="btn btn-primary btn-lg btn-block" type="submit">Pay </button>
+                                        </div>
+                                    </div> -->
                                         <div class="row mb-3">
                                             <div class="col-sm-2"></div>
                                             <div class="col-sm-10" id="showPaymentType"></div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary float-end">Pay DownPayment</button>
+                                        <div class="d-flex justify-content-center">
+                                            <button type="submit" class="btn btn-primary float-end">Pay DownPayment</button>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
@@ -172,15 +230,84 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>      
+                            
+                    
+
+
+
+
+
+
+
+
+
         </div>
     </section>
 
 @endsection
 @section('footer')
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+  
+<script type="text/javascript">
+$(function() {
+   
+    var $form = $(".require-validation");
+   
+    $('form.require-validation').bind('submit', function(e) {
+        var $form         = $(".require-validation"),
+        inputSelector = ['input[type=email]', 'input[type=password]',
+                         'input[type=text]', 'input[type=file]',
+                         'textarea'].join(', '),
+        $inputs       = $form.find('.required').find(inputSelector),
+        $errorMessage = $form.find('div.error'),
+        valid         = true;
+        $errorMessage.addClass('hide');
+  
+        $('.has-error').removeClass('has-error');
+        $inputs.each(function(i, el) {
+          var $input = $(el);
+          if ($input.val() === '') {
+            $input.parent().addClass('has-error');
+            $errorMessage.removeClass('hide');
+            e.preventDefault();
+          }
+        });
+   
+        if (!$form.data('cc-on-file')) {
+          e.preventDefault();
+          Stripe.setPublishableKey($form.data('stripe-publishable-key'));
+          Stripe.createToken({
+            number: $('.card-number').val(),
+            cvc: $('.card-cvc').val(),
+            exp_month: $('.card-expiry-month').val(),
+            exp_year: $('.card-expiry-year').val()
+          }, stripeResponseHandler);
+        }
+  
+  });
+  
+  function stripeResponseHandler(status, response) {
+        if (response.error) {
+            $('.error')
+                .removeClass('hide')
+                .find('.alert')
+                .text(response.error.message);
+        } else {
+            /* token contains id, last4, and card type */
+            var token = response['id'];
+               
+            $form.find('input[type=text]').empty();
+            $form.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
+            $form.get(0).submit();
+        }
+    }
+   
+});
+</script>
 <script>
     $('#downPayment').keyup(function() {
-        $('#showPaymentType').text('Rp. ' + parseFloat($(this).val(), 10).toFixed(2).replace(
+        $('#showPaymentType').text('USD. ' + parseFloat($(this).val(), 10).toFixed(2).replace(
                 /(\d)(?=(\d{3})+\.)/g, "$1.")
             .toString());
     });

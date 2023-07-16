@@ -25,6 +25,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StripeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
 
@@ -39,9 +40,6 @@ use Illuminate\Support\Facades\Mail;
 |
 */
 
-// Route::get('/', function () {
-//     return view('Hotel.home');
-// });
 
 
 Route::get('/',[HomeController::class, 'index'])->name('home');
@@ -85,47 +83,42 @@ Route::group(['middleware' => ['auth', 'checkRole:Super,Admin']], function () {
 
     Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
     Route::get('/payment/{payment}/invoice', [PaymentController::class, 'invoice'])->name('payment.invoice');
-
     Route::get('/transaction/{transaction}/payment/create', [PaymentController::class, 'create'])->name('transaction.payment.create');
     Route::post('/transaction/{transaction}/payment/store', [PaymentController::class, 'store'])->name('transaction.payment.store');
-
     Route::get('/get-dialy-guest-chart-data', [ChartController::class, 'dialyGuestPerMonth']);
     Route::get('/get-dialy-guest/{year}/{month}/{day}', [ChartController::class, 'dialyGuest'])->name('chart.dialyGuest');
 });
 
 Route::group(['middleware' => ['auth', 'checkRole:Super,Admin']], function () {
-    // Route::resource('user', UserController::class)->only([
-    //     'show'
-    // ]);
     Route::view('/notification', 'notification.index')->name('notification.index');
-    // Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/mark-all-as-read', [NotificationsController::class, 'markAllAsRead'])->name('notification.markAllAsRead');
     Route::get('/notification-to/{id}',[NotificationsController::class, 'routeTo'])->name('notification.routeTo');
 });
 
 Route::group(['middleware' => ['auth', 'checkRole:Customer']], function () {
+    Route::get('/stripe', [StripeController::class, 'stripe']);
+    Route::post('/stripe', [StripeController::class, 'stripePost'])->name('stripe.post');
+    Route::post('/stripe', [StripeController::class, 'stripePost'])->name('stripe.post');
     Route::name('book.reservation.')->group(function () {
         Route::get('/CustomerCreateIdentity', [BookTransactionRoomReservationController::class, 'createIdentity'])->name('CIdentity');
         Route::get('/CustomerPickFromCustomer', [BookTransactionRoomReservationController::class, 'pickFromCustomer'])->name('PCustomer');
         Route::post('/CustomerStoreCustomer', [BookTransactionRoomReservationController::class, 'storeCustomer'])->name('SCustomer');
-        // Route::get('/{customer}/CustomerViewCountPerson', [BookTransactionRoomReservationController::class, 'viewCountPerson'])->name('vCountPerson');
         Route::get('/{customer}/test', [BookTransactionRoomReservationController::class, 'test'])->name('vCountPerson');
         Route::get('/{customer}/CRoom', [BookTransactionRoomReservationController::class, 'choosesRoom'])->name('CRoom');
-        // Route::get('/{customer}/CRoom',function(){return view ('Hotel.Booking.reservation.createIdentity');})->name('CRoom');
         Route::get('/{customer}/{room}/{from}/{to}/CustomerConfirmation', [BookTransactionRoomReservationController::class, 'confirmation'])->name('Confirm');
         Route::post('/{customer}/{room}/CustomerPayDownPayment', [BookTransactionRoomReservationController::class, 'payDownPayment'])->name('payPayment');
     });
-    // Route::resource('/booking', BookController::class);
 })->middleware(['auth', 'verified']);
-// Route::get('/customerCC',function(){      
-//     return view ('Hotel.Booking.reservation.createIdentity');}
-//             );
-
-
 
 Route::get('/home', [HomeController::class, 'index']);
-
+Route::get('/about-us',[UserController::class,'about']);
+Route::get('/contact',[ContactController::class,'createForm'])->name('contact.show');
+Route::post('/contact',[ContactController::class,'ContactUsForm'])->name('contact.submit');
+Route::get('/rooms',[RoomController::class,'displayRooms'])->middleware(['auth', 'verified']);
+Route::get('/roomBooking/{roomBooking}',[RoomController::class,'singleRoom'])->middleware(['auth', 'verified'])->name('roomBooking');
+Route::get('/restaurant',[UserController::class,'restaurant']);
+Route::get('/search', [RoomController::class,'roomFiltering'])->name('roomFiltering');
 Route::get('/sendEvent', function () {
     $superAdmins = User::where('role', 'Super')->get();
     event(new RefreshDashboardEvent("Someone reserved a room"));
@@ -135,23 +128,6 @@ Route::get('/sendEvent', function () {
         // event(new NewReservationEvent($message, $superAdmin));
     }
 });
-// Route::get('/home',[UserController::class,'home']);
-Route::get('/about-us',[UserController::class,'about']);
-Route::get('/contact',[ContactController::class,'createForm'])->name('contact.show');
-Route::post('/contact',[ContactController::class,'ContactUsForm'])->name('contact.submit');
-// Route::get('/contact', [ContactUsFormController::class, 'createForm']);
-// Route::post('/contact', [ContactUsFormController::class, 'ContactUsForm'])->name('contact.store');
 
-Route::get('/rooms',[RoomController::class,'displayRooms'])->middleware(['auth', 'verified']);
-// Route::get('/roomBooking',[RoomController::class,'singleRoom'])->middleware(['auth', 'verified'])->name('roomBooking');
-Route::get('/roomBooking/{roomBooking}',[RoomController::class,'singleRoom'])->middleware(['auth', 'verified'])->name('roomBooking');
-// Route::get('/roomFiltering',[RoomController::class,'roomFiltering'])->name('roomFiltering');
-Route::get('/restaurant',[UserController::class,'restaurant']);
-Route::get('/search', [RoomController::class,'roomFiltering'])->name('roomFiltering');
 
 require __DIR__.'/auth.php';
-
-
-// Route::get('/room-reservation', function () {
-//     return view('room-reservation');
-// })->middleware(['auth', 'verified'])->name('room-reservation');

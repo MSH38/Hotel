@@ -62,6 +62,18 @@ class TransactionRoomReservationController extends Controller
 
         return view('transaction.reservation.chooseRoom', compact('customer', 'rooms', 'stayFrom', 'stayUntil', 'roomsCount'));
     }
+    public function stripePost(){
+        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        Stripe\Charge::create([
+            'amount' => 100*100,
+            'currency'=>"usd",
+            'source'=> $request->stripeToken,
+            'description' =>'Test payment from muhammed essa'
+        ]);
+
+        Session::flash('success','Payment has been successfully');
+        return back();
+    }
 
     public function confirmation(Customer $customer, Room $room, $stayFrom, $stayUntil)
     {
@@ -73,6 +85,7 @@ class TransactionRoomReservationController extends Controller
 
     public function payDownPayment(Customer $customer, Room $room, Request $request, TransactionRepository $transactionRepository, PaymentRepository $paymentRepository)
     {
+        dd($request()->all());
         $dayDifference = Helper::getDateDifference($request->check_in, $request->check_out);
         $minimumDownPayment = ($room->price * $dayDifference) * 0.15;
 
@@ -101,7 +114,16 @@ class TransactionRoomReservationController extends Controller
 
         event(new RefreshDashboardEvent("Someone reserved a room"));
 
-        return redirect()->route('transaction.index')->with('success', 'Room ' . $room->number . ' has been reservated by ' . $customer->name);
+        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        Stripe\Charge::create([
+            'amount' => $request->Total_price,
+            'currency'=>"usd",
+            'source'=> $request->stripeToken,
+            'description' =>'Test payment from muhammed essa'
+        ]);
+        Session::flash('success','Payment has been successfully');
+
+        return redirect()->route('/')->with('success', 'Room ' . $room->number . ' has been reservated by ' . $customer->name);
     }
 
     private function getOccupiedRoomID($stayFrom, $stayUntil)

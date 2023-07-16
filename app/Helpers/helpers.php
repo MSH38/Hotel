@@ -9,7 +9,7 @@ class Helper
 {
     public static function convertToRupiah($price)
     {
-        $price_rupiah = "Rp. " . number_format($price, 2, ',', '.');
+        $price_rupiah = "USD. " . number_format($price, 2, ',', '.');
         return $price_rupiah;
     }
 
